@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "Europe/Paris"
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+      - dependency-type: "all"
+    reviewers:
+      - "pierrre"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "Europe/Paris"
