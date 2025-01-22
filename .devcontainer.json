@@ -3,9 +3,7 @@
 		"codespaces": {
 			"repositories": {
 				"pierrre/*": {
-					"permissions": {
-						"permissions": "write-all"
-					}
+					"permissions": "write-all"
 				}
 			}
 		}
