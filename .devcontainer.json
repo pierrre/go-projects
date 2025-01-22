@@ -1,0 +1,13 @@
+{
+	"customizations": {
+		"codespaces": {
+			"repositories": {
+				"pierrre/*": {
+					"permissions": {
+						"permissions": "write-all"
+					}
+				}
+			}
+		}
+	}
+}
