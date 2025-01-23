@@ -1,5 +1,7 @@
 include Makefile-common.mk
 
+CODESPACES?=false
+
 ALL_COMMAND=cat projects.txt | xargs -I {} $(1)
 ALL_RUN=$(call ALL_COMMAND,sh -c 'echo {} && cd ../{} && $(1)')
 .PHONY: all-run
@@ -7,7 +9,11 @@ all-run:
 	$(eval COMMAND?=ls)
 	$(call ALL_RUN,$(COMMAND))
 
+ifeq ($(CI),true)
 GIT_REPOSITORY_PATTERN=https://github.com/pierrre/{}.git
+else
+GIT_REPOSITORY_PATTERN=git@github.com:pierrre/{}.git
+endif
 .PHONY: all-git-clone
 all-git-clone:
 	$(call ALL_COMMAND,sh -c "(ls ../{} > /dev/null 2>&1 || git -C .. clone $(GIT_REPOSITORY_PATTERN))")
