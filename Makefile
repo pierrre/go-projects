@@ -9,7 +9,7 @@ all-run:
 	$(eval COMMAND?=ls)
 	$(call ALL_RUN,$(COMMAND))
 
-ifeq ($(CI),true)
+ifeq ($(CODESPACES),true)
 GIT_REPOSITORY_PATTERN=https://github.com/pierrre/{}.git
 else
 GIT_REPOSITORY_PATTERN=git@github.com:pierrre/{}.git
