@@ -1,2 +1,2 @@
-// Package projects allows to manage Go projects.
+// Package projects allows managing Go projects.
 package projects
