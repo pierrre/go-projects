@@ -45,7 +45,6 @@ Generics-based, allocation-free validation library with composable validators (A
 
 Shared utility sub-packages (bytesutil, chansutil, goroutine, reflectutil, singleflight, syncutil/atomicutil, unsafeio, weakutil, etc.) used across the author's projects.
 
-- [refactor] (P3) In `singleflight.doCall`, the block `if !c.doneInitialized { c.doneInitialized = true }` is dead code: the key is deleted under `mu` earlier, so no future `getOrCreateCall` can observe this flag for this call, and the doer's close-decision checks `c.done != nil` not the flag. Refs: singleflight/singleflight.go:105
 - [improve] (P3) In `singleflight.waitCall`, `if c.done != nil` is always true and the nil-channel fall-through is unreachable: the first waiter creates `c.done` before any waiter enters `waitCall`, and the doer deletes the key before setting `doneInitialized`, so no waiter can observe `doneInitialized==true && done==nil`. Refs: singleflight/singleflight.go:81
 
 ## geohash — github.com/pierrre/geohash
