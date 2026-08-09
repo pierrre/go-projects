@@ -158,7 +158,6 @@ Personal opencode agent-config repo: global AGENTS.md rules, opencode.jsonc prov
 
 Small generic dependency-injection container with named services, lazy singleton init, and panic-aware builders.
 
-- [bug] (P2) `serviceWrapper.close` does not recover panics (unlike `ensureInitialized` which defers `recoverPanicToError`), so a panicking `Close` aborts `Container.Close` mid-loop and leaks all remaining services. Refs: service.go:89
 - [improve] (P3) `Container.Close` closes services in alphabetical key order, not reverse-build/dependency order; a Close that touches a dependency finds it already closed, and a subsequent Get rebuilds it outside the snapshot (leak). Refs: container.go:54
 - [docs] (P3) `Container.Close` doc omits close-order semantics and does not warn that Close callbacks must not call Get on other services. Refs: container.go:47
 
