@@ -81,7 +81,6 @@ Mandelbrot fractal renderer: core set computation with specialized per-power ite
 Langton's ant cellular automaton library with a core grid/ant/rules engine and two CLI frontends (termbox graphical, text stdout).
 
 
-- [improve] (P3) `cmd/text` runs an infinite `for` loop with no exit condition, step limit, or signal handling, so it can only be stopped by killing the process (unlike `cmd/termbox` which exits on keypress). Refs: cmd/text/text.go:25
 - [docs] (P3) README is 5 lines with no usage, build, or run instructions and doesn't mention the `cmd/termbox` or `cmd/text` demo commands. Refs: README.md
 
 ## cellauto — github.com/pierrre/cellauto
