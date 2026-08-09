@@ -86,7 +86,6 @@ Langton's ant cellular automaton library with a core grid/ant/rules engine and t
 
 Small cellular automaton library exposing Game of Life and Wireworld rules with two CLI frontends (interactive termbox viewer and PNG-output runner).
 
-- [refactor] (P3) `wireworld.Game` re-implements the `tmpGrid` alloc + swap pattern already present in `cellauto.Game`; it could embed or delegate to the shared Game. Refs: wireworld/wireworld.go:69
 
 ## agents — (opencode agent config repo, not Go)
 
