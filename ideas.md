@@ -144,14 +144,6 @@ Small cellular automaton library exposing Game of Life and Wireworld rules with 
 - [docs] (P3) README is a 5-line stub with no usage, subcommand listing, or description of the `.wi` file format consumed by cmd/wireworld. Refs: README.md
 - [refactor] (P3) `wireworld.Game` re-implements the `tmpGrid` alloc + swap pattern already present in `cellauto.Game`; it could embed or delegate to the shared Game. Refs: wireworld/wireworld.go:69
 
-## go-projects — github.com/pierrre/go-projects
-
-Stub Go package with a project name list and a Makefile that fans out commands across sibling repos.
-
-- [feat] (P2) Expose project metadata (name + repo URL pattern) as a Go API, mirroring the GIT_REPOSITORY_PATTERN logic already encoded in the Makefile. Refs: Makefile:13
-- [improve] (P2) Makefile parses projects.txt via `cat | xargs -I {} sh -c` (fragile: no quoting, fails on blanks/special chars); prefer a Go-based iterator or `while read` loop. Refs: Makefile:5
-- [improve] (P3) `all-copy-common` blindly overwrites shared config (.golangci.yml, .github, etc.) in sibling repos with no diff guard, risking clobbered local edits. Refs: Makefile:22
-
 ## agents — (opencode agent config repo, not Go)
 
 Personal opencode agent-config repo: global AGENTS.md rules, opencode.jsonc provider/model config, and a Makefile that symlinks the repo into ~/.config/opencode.
