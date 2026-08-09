@@ -25,7 +25,6 @@ Legend:
 
 Go test assertion library using generics (no reflection), with auto-updating snapshot assertions (`assertauto`).
 
-- [feat] (P3) `chan.go` TODO is unresolved: no support for receive/send-only channels (`<-chan T`, `chan<- T`). Refs: chan.go:8
 - [improve] (P3) `AllocsPerRun` silently passes (returns true) under `-race`, which can hide allocation regressions in race-enabled CI; consider `tb.Log`-ing that the check was skipped so it's visible. Refs: alloc.go:17-18
 - [docs] (P3) README documents core assertions but has no section for `assertauto` (auto-updating snapshot assertions), a notable differentiating feature. Refs: README.md
 
