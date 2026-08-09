@@ -8,7 +8,7 @@
 - Process ideas one at a time, in priority order: P1 → P2 → P3 (file order within each priority).
 - For each idea, dispatch a single sub-agent (no parallel sub-agents).
 - The sub-agent must first read the current source and validate the idea. Reject if the issue no longer exists, is a false positive, the fix would break the public API, or it's too large/risky for one focused PR.
-- If valid: ensure the target repo's `main` is up to date (`git checkout main && git pull`), create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`, request review from `pierrre`). All new and modified code must be covered by tests — verify with `go test -coverprofile=cover.out ./... && go tool cover -func=cover.out` and add cases until coverage is complete. If a part genuinely cannot be tested, note it in the PR body.
+- If valid: ensure the target repo's `main` is up to date (`git checkout main && git pull`), create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`, request review from `pierrre`). All new and modified code must be covered by tests — verify with `go test -coverprofile=cover.out ./... && go tool cover -func=cover.out` and add cases until coverage is complete. If a part genuinely cannot be tested, note it in the PR body. Remove the `cover.out` file after checking.
 - If rejected: no branch, no PR. Record the reason in the removal commit message (see below).
 - After each idea (implemented or rejected): remove its bullet from this file, commit on `go-projects` `main` with a message like `Remove <idea>: implemented` or `Remove <idea>: rejected: <reason>`, and push. No branch or PR for this edit.
 - Return the target repo to `main` and pull before starting the next idea.
@@ -113,7 +113,6 @@ CLI/library that finds duplicate files by walking filesystems, grouping files by
 
 CLI library `filerandom` walks one or more filesystems, collects regular files above a min size, and `rand.Intn`-picks uniformly; the `cmd/file-random` binary loops printing/opening picks.
 
-- [bug] (P2) Root "/" is rewritten to "" before `os.DirFS`, which then scans the process CWD (not `/`): DirFS opens via `filepath.Join(dir, name)`, so an empty dir resolves relative to cwd, and the printed path is relative too. Refs: cmd/file-random/main.go:74-77
 - [improve] (P3) `-min-size` accepts negatives with no validation; `WithMinSize(<0)` silently disables the filter since `size < negative` is never true. Refs: cmd/file-random/flags.go:22, file_random.go:121
 - [improve] (P3) Omitting roots produces the generic "no file" error instead of a clear "no roots specified", deferring the real cause past the flag layer. Refs: cmd/file-random/flags.go:26, cmd/file-random/main.go:43
 - [refactor] (P3) `fl.minSize != 0` uses 0 as an implicit "no filter" sentinel while `newFlags` defaults to 1, making the option's tri-state (unset/0/positive) semantics implicit and surprising. Refs: cmd/file-random/main.go:80
