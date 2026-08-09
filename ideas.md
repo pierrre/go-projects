@@ -55,7 +55,6 @@ Geohash encode/decode library with a CLI front-end (`cmd/geohash`).
 
 Unbounded channel that bridges an input and output channel through a single goroutine and an in-memory linked-list queue, with `Close()` draining both ends.
 
-- [bug] (P3) `Channel.Close` is unsafe for concurrent callers: two goroutines can both hit `default: close(c.in)` before either close lands, double-closing and panicking; the contract is undocumented. Refs: unlimited_channel.go:64-76
 - [improve] (P3) `WithContext` passes a context that has no cancellation effect on the goroutine — it only exits via `Close()` or closing the input — so the parameter implies context-driven shutdown that does not exist. Refs: unlimited_channel.go:30-32,166-174
 - [improve] (P3) `queue.enqueue` sets `newElem.value` but never `newElem.next`, so list correctness silently depends on `dequeue` nilling `next` before returning elements to the pool; any future change to `dequeue` corrupts the tail. Refs: queue.go:14-27,29-45
 - [refactor] (P3) `run()` is a four-flag state machine (`inOpen/inReceived/outValueOK/outSent`) across three cascading selects with multiple `continue` paths, acknowledged by the `gocyclo` suppression and hard to audit for correctness. Refs: unlimited_channel.go:78-145
