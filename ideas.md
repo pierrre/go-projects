@@ -122,7 +122,6 @@ CLI library `filerandom` walks one or more filesystems, collects regular files a
 
 Mandelbrot fractal renderer: core set computation with specialized per-power iterators, an image package (sequential/parallel render, colorizers), and a small CLI helper for PNG output.
 
-- [bug] (P2) `ColorsIterColorizer` indexes `cols[(res.Iter+shift)%len(cols)]` — panics with integer divide by zero when `cols` is empty, and panics with negative index when `shift<0` since Go's `%` keeps the dividend's sign. Refs: image/colorizer.go:22
 - [refactor] (P3) The 19 specialized `newPowN` functions (lines 88–556) duplicate an identical loop body differing only in the power computation; a generator or shared helper would remove ~470 lines of near-copy-paste. Refs: mandelbrot.go:88
 - [docs] (P3) README.md is only 5 lines (title + pkg.go.dev badge) with no install, usage, CLI, or example sections to orient new users. Refs: README.md:1
 - [improve] (P3) `cmd.Save` panics on `png.Encode`/`os.WriteFile` errors instead of returning them, forcing callers to `recover` if they want to handle I/O failures gracefully. Refs: cmd/cmd.go:16
