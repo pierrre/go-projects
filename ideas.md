@@ -173,3 +173,11 @@ Small generic dependency-injection container with named services, lazy singleton
 - [bug] (P2) `serviceWrapper.close` does not recover panics (unlike `ensureInitialized` which defers `recoverPanicToError`), so a panicking `Close` aborts `Container.Close` mid-loop and leaks all remaining services. Refs: service.go:89
 - [improve] (P3) `Container.Close` closes services in alphabetical key order, not reverse-build/dependency order; a Close that touches a dependency finds it already closed, and a subsequent Get rebuilds it outside the snapshot (leak). Refs: container.go:54
 - [docs] (P3) `Container.Close` doc omits close-order semantics and does not warn that Close callbacks must not call Get on other services. Refs: container.go:47
+
+## compare — github.com/pierrre/compare
+
+Generics-supported, reflect-based recursive comparator producing path-annotated Differences with cycle detection, custom Func dispatch, and cached .Equal()/.Cmp() method handling.
+
+- [improve] (P3) `comparePointer` skips `compareNil`, so nil-vs-non-nil `*T` reports "only one is valid" (via `Elem` on the nil pointer) instead of "only one is nil" like chan/func/interface — inconsistent and misleading. Refs: compare.go:311-320
+- [improve] (P3) Identifier typo: `cmdMethodFuncs`/`cmdMethodFuncsLock` should be `cmp...` (the sibling func/msg consts all use `Cmp`); hurts grepability, copy-paste from the Equal variant. Refs: compare.go:665-666
+- [refactor] (P3) `getMethodEqualFunc` and `getMethodCmpFunc` are ~30-line near-duplicates (nil-sentinel cache lookup + signature validation); collapse into one shared helper parameterized by name/outType. Refs: compare.go:619-691
