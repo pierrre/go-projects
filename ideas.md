@@ -70,7 +70,6 @@ CLI/library that finds duplicate files by walking filesystems, grouping files by
 
 CLI library `filerandom` walks one or more filesystems, collects regular files above a min size, and `rand.Intn`-picks uniformly; the `cmd/file-random` binary loops printing/opening picks.
 
-- [docs] (P3) README lists no CLI flags beyond a `-h` hint, so users have no reference for `-min-size`, `-open`, `-loop`, `-continue-on-error`, `-v`. Refs: README.md
 
 ## mandelbrot — github.com/pierrre/mandelbrot
 
