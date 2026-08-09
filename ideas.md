@@ -25,7 +25,6 @@ Legend:
 
 Go test assertion library using generics (no reflection), with auto-updating snapshot assertions (`assertauto`).
 
-- [docs] (P3) README documents core assertions but has no section for `assertauto` (auto-updating snapshot assertions), a notable differentiating feature. Refs: README.md
 
 ## errors — github.com/pierrre/errors
 
