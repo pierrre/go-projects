@@ -7,7 +7,7 @@
 - Process ideas one at a time, in priority order: P1 → P2 → P3 (file order within each priority).
 - For each idea, dispatch a single sub-agent (no parallel sub-agents).
 - The sub-agent must first read the current source and validate the idea. Reject if the issue no longer exists, is a false positive, the fix would break the public API, or it's too large/risky for one focused PR.
-- If valid: ensure the target repo's `main` is up to date (`git checkout main && git pull`), create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`, request review from `pierrre`).
+- If valid: ensure the target repo's `main` is up to date (`git checkout main && git pull`), create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`, request review from `pierrre`). All new and modified code must be covered by tests — verify with `go test -coverprofile=cover.out ./... && go tool cover -func=cover.out` and add cases until coverage is complete. If a part genuinely cannot be tested, note it in the PR body.
 - If rejected: no branch, no PR. Record the reason in the removal commit message (see below).
 - After each idea (implemented or rejected): remove its bullet from this file, commit on `go-projects` `main` with a message like `Remove <idea>: implemented` or `Remove <idea>: rejected: <reason>`, and push. No branch or PR for this edit.
 - Return the target repo to `main` and pull before starting the next idea.
