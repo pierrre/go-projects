@@ -50,7 +50,6 @@ Shared utility sub-packages (bytesutil, chansutil, goroutine, reflectutil, singl
 
 Geohash encode/decode library with a CLI front-end (`cmd/geohash`).
 
-- [docs] (P3) `Encode` doc claims max precision 32 but is silent on `precision <= 0` behavior (panics for negative, returns "" for zero). Refs: geohash.go:49-55
 
 ## unlimited-channel — github.com/pierrre/unlimited-channel
 
