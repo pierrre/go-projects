@@ -65,7 +65,6 @@ Shared-module collection of small, self-contained Go experiment sub-packages (fi
 
 CLI/library that finds duplicate files by walking filesystems, grouping files by identical size, then SHA256-hashing each same-sized group.
 
-- [improve] (P3) `filesBySize` holds every qualifying path in memory and each same-sized file is hashed in full, with no partial-hash/early-exit for large groups. Refs: file_duplicate.go:163, file_duplicate.go:192
 
 ## file-random — github.com/pierrre/file-random
 
