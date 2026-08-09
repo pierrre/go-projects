@@ -70,7 +70,6 @@ CLI/library that finds duplicate files by walking filesystems, grouping files by
 
 CLI library `filerandom` walks one or more filesystems, collects regular files above a min size, and `rand.Intn`-picks uniformly; the `cmd/file-random` binary loops printing/opening picks.
 
-- [improve] (P3) `-min-size` accepts negatives with no validation; `WithMinSize(<0)` silently disables the filter since `size < negative` is never true. Refs: cmd/file-random/flags.go:22, file_random.go:121
 - [improve] (P3) Omitting roots produces the generic "no file" error instead of a clear "no roots specified", deferring the real cause past the flag layer. Refs: cmd/file-random/flags.go:26, cmd/file-random/main.go:43
 - [refactor] (P3) `fl.minSize != 0` uses 0 as an implicit "no filter" sentinel while `newFlags` defaults to 1, making the option's tri-state (unset/0/positive) semantics implicit and surprising. Refs: cmd/file-random/main.go:80
 - [docs] (P3) README lists no CLI flags beyond a `-h` hint, so users have no reference for `-min-size`, `-open`, `-loop`, `-continue-on-error`, `-v`. Refs: README.md
