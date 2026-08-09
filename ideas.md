@@ -2,6 +2,7 @@
 
 # Processing
 
+- Before processing each idea, dispatch a sub-agent to scan open PRs for unaddressed review comments from `pierrre`. List PRs with `gh search prs --owner pierrre --state open --json repository,number,title,url`. For each PR, fetch issue comments (`gh api repos/<owner>/<repo>/issues/<n>/comments`) and review comments (`gh api repos/<owner>/<repo>/pulls/<n>/comments`), merge and sort by timestamp. The last comment starting with `Done:` marks the cutoff — comments after it (or all if none) are unaddressed. For each unaddressed actionable comment: check out the PR branch, implement the requested change, run `make all`, commit, push, reply via `gh pr comment <n> --repo <repo> --body "Done: <summary>"`, and return the repo to `main`. Skip non-actionable comments (approvals, "LGTM", emoji). If a comment requests a change you disagree with, reply with `Done: not applied — <reason>`.
 - Process ideas one at a time, in priority order: P1 → P2 → P3 (file order within each priority).
 - For each idea, dispatch a single sub-agent (no parallel sub-agents).
 - The sub-agent must first read the current source and validate the idea. Reject if the issue no longer exists, is a false positive, the fix would break the public API, or it's too large/risky for one focused PR.
@@ -23,7 +24,6 @@ Legend:
 Go test assertion library using generics (no reflection), with auto-updating snapshot assertions (`assertauto`).
 
 - [improve] (P3) `Fail` allocates `args := []any{msg}` then spreads it into `o.report(tb, args...)`; since there is exactly one arg, call `o.report(tb, msg)` directly to drop the slice allocation. Refs: assert.go:73-74
-- [feat] (P2) `assertauto` documents that concurrent calls sharing a test name are unsafe and produce flaky results; a per-test-name `sync.Mutex` (keyed by test name) would make this safe automatically. Refs: assertauto/assertauto.go:17-20
 - [feat] (P2) No unordered slice comparison (testify's `ElementsMatch` equivalent); `SliceEqual` is order-sensitive. A `SliceElementsMatch[S ~[]E, E comparable]` would fill the gap. Refs: slice.go
 - [feat] (P3) `chan.go` TODO is unresolved: no support for receive/send-only channels (`<-chan T`, `chan<- T`). Refs: chan.go:8
 - [improve] (P3) `AllocsPerRun` silently passes (returns true) under `-race`, which can hide allocation regressions in race-enabled CI; consider `tb.Log`-ing that the check was skipped so it's visible. Refs: alloc.go:17-18
