@@ -89,7 +89,6 @@ Unbounded channel that bridges an input and output channel through a single goro
 
 GitHub webhook HTTP handler that parses and HMAC-verifies untrusted payloads, dispatching decoded events via callbacks.
 
-- [feat] (P2) Only the legacy SHA1 `X-Hub-Signature` is verified; GitHub now recommends SHA-256 via `X-Hub-Signature-256`. Refs: githubhook.go:116
 - [improve] (P3) Empty `Secret` silently skips signature verification, so a misconfigured handler accepts forged payloads; fail closed or document loudly. Refs: githubhook.go:113
 - [improve] (P3) Distinct error messages ("format" vs "doesn't match secret") are reflected in the HTTP response body via `http.Error`, leaking the verification stage to an attacker. Refs: githubhook.go:124,142-144
 - [docs] (P3) README lists "Secret validation" as a feature without noting that omitting `Secret` disables it entirely. Refs: README.md:10
