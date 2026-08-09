@@ -35,7 +35,6 @@ Errors library with message wrapping, stack traces, tags, values, verbose output
 
 Reflection-based pretty printer with a modular `ValueWriter` chain, cycle/recursion detection, max depth, hex dumps, iter.Seq/Seq2 support, and protobuf extensions.
 
-- [docs] (P3) README is 27 lines for a feature-rich library; doesn't mention `RecursionWriter`, `Filter`, `UnwrapInterface`, `WeakPointer`, `Iter`/`Range` writers, or the `ext/` packages. Refs: README.md
 
 ## vld — github.com/pierrre/vld
 
