@@ -40,7 +40,6 @@ Reflection-based pretty printer with a modular `ValueWriter` chain, cycle/recurs
 
 Generics-based, allocation-free validation library with composable validators (And/Or/If/IfElse/Switch), built-in checks, localized messages (en/fr), and error-path extraction.
 
-- [docs] (P3) `SwitchValidator.Validate` silently returns nil when no `Case` condition matches (no default), so an exhaustive switch over a finite value set can let invalid values pass unnoticed; document this explicitly or add a `Default`/required-match option. Refs: condition.go:111
 - [refactor] (P3) `SliceUniqueValidator.Validate` and `SliceUniqueByValidator.Validate` duplicate the same seen-map/append-`PathElemError` logic; extract a shared `validateUniqueByKey(s, getKey, makeErr)` helper to halve the code and keep the two paths in sync. Refs: slice.go:321
 
 ## go-libs — github.com/pierrre/go-libs
