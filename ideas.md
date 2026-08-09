@@ -56,14 +56,6 @@ Geohash encode/decode library with a CLI front-end (`cmd/geohash`).
 Unbounded channel that bridges an input and output channel through a single goroutine and an in-memory linked-list queue, with `Close()` draining both ends.
 
 
-## githubhook — github.com/pierrre/githubhook
-
-GitHub webhook HTTP handler that parses and HMAC-verifies untrusted payloads, dispatching decoded events via callbacks.
-
-- [improve] (P3) Empty `Secret` silently skips signature verification, so a misconfigured handler accepts forged payloads; fail closed or document loudly. Refs: githubhook.go:113
-- [improve] (P3) Distinct error messages ("format" vs "doesn't match secret") are reflected in the HTTP response body via `http.Error`, leaking the verification stage to an attacker. Refs: githubhook.go:124,142-144
-- [docs] (P3) README lists "Secret validation" as a feature without noting that omitting `Secret` disables it entirely. Refs: README.md:10
-
 ## go-stuff — github.com/pierrre/go-stuff
 
 Shared-module collection of small, self-contained Go experiment sub-packages (five fibonacci variants, a reflection-based function-mocking helper, and a password-entropy estimator).
