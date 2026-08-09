@@ -40,7 +40,6 @@ Reflection-based pretty printer with a modular `ValueWriter` chain, cycle/recurs
 
 Generics-based, allocation-free validation library with composable validators (And/Or/If/IfElse/Switch), built-in checks, localized messages (en/fr), and error-path extraction.
 
-- [improve] (P3) `GetErrorPath` follows a single chain (`errors.AsType` then `err = pErr.Err`); for joined errors (multi-branch, as produced by `SliceEach`/`ErrorJoin`) it returns only the first branch's path and silently drops the others, which can mislead users debugging nested-slice/map errors. Refs: path.go:112
 - [docs] (P3) Constructors `If`, `IfElse`, `Case`, `Parse`, `Get`, `Field`, `SliceUniqueBy` document "It panics if X is nil" but perform no explicit nil check, so the panic actually fires at `Validate` time as a nil-function-call panic, far from construction and harder to diagnose — either add an explicit check at construction or reword the doc to say "panics at Validate time." Refs: condition.go:9
 - [docs] (P3) `SwitchValidator.Validate` silently returns nil when no `Case` condition matches (no default), so an exhaustive switch over a finite value set can let invalid values pass unnoticed; document this explicitly or add a `Default`/required-match option. Refs: condition.go:111
 - [refactor] (P3) `SliceUniqueValidator.Validate` and `SliceUniqueByValidator.Validate` duplicate the same seen-map/append-`PathElemError` logic; extract a shared `validateUniqueByKey(s, getKey, makeErr)` helper to halve the code and keep the two paths in sync. Refs: slice.go:321
