@@ -22,7 +22,6 @@ Legend:
 
 Go test assertion library using generics (no reflection), with auto-updating snapshot assertions (`assertauto`).
 
-- [improve] (P2) `bytesWriterPool` uses `MaxCap: -1` (unbounded); pooled buffers can retain arbitrarily large stack-trace strings, pinning memory across runs. Cap `MaxCap` to bound retention. Refs: assert.go:77-79
 - [improve] (P3) `Fail` allocates `args := []any{msg}` then spreads it into `o.report(tb, args...)`; since there is exactly one arg, call `o.report(tb, msg)` directly to drop the slice allocation. Refs: assert.go:73-74
 - [feat] (P2) `assertauto` documents that concurrent calls sharing a test name are unsafe and produce flaky results; a per-test-name `sync.Mutex` (keyed by test name) would make this safe automatically. Refs: assertauto/assertauto.go:17-20
 - [feat] (P2) No unordered slice comparison (testify's `ElementsMatch` equivalent); `SliceEqual` is order-sensitive. A `SliceElementsMatch[S ~[]E, E comparable]` would fill the gap. Refs: slice.go
