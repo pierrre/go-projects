@@ -5,10 +5,10 @@
 - Process ideas one at a time, in priority order: P1 → P2 → P3 (file order within each priority).
 - For each idea, dispatch a single sub-agent (no parallel sub-agents).
 - The sub-agent must first read the current source and validate the idea. Reject if the issue no longer exists, is a false positive, the fix would break the public API, or it's too large/risky for one focused PR.
-- If valid: create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`).
+- If valid: ensure the target repo's `main` is up to date (`git checkout main && git pull`), create a `feature/<slug>` branch off `main`, implement the fix, run `make all` in that repo, commit, push, and open a PR (base `main`, assignee `pierrre`, request review from `pierrre`).
 - If rejected: no branch, no PR. Record the reason in the removal commit message (see below).
 - After each idea (implemented or rejected): remove its bullet from this file, commit on `go-projects` `main` with a message like `Remove <idea>: implemented` or `Remove <idea>: rejected: <reason>`, and push. No branch or PR for this edit.
-- Return the target repo to `main` before starting the next idea.
+- Return the target repo to `main` and pull before starting the next idea.
 
 Generated: 2026-08-09
 Scope: /home/pierre/Git/pierrre workspace (Go 1.26.0)
@@ -22,7 +22,6 @@ Legend:
 
 Go test assertion library using generics (no reflection), with auto-updating snapshot assertions (`assertauto`).
 
-- [refactor] (P2) `ValueStringer.Load()` is called multiple times per failure (e.g. twice in `Equal`); hoist to a local `vs := ValueStringer.Load()` once per Fail. The double-load pattern repeats across every assertion file. Refs: equal.go:21, slice.go:109,145, map.go:55,109, deep_equal.go:43
 - [improve] (P2) `bytesWriterPool` uses `MaxCap: -1` (unbounded); pooled buffers can retain arbitrarily large stack-trace strings, pinning memory across runs. Cap `MaxCap` to bound retention. Refs: assert.go:77-79
 - [improve] (P3) `Fail` allocates `args := []any{msg}` then spreads it into `o.report(tb, args...)`; since there is exactly one arg, call `o.report(tb, msg)` directly to drop the slice allocation. Refs: assert.go:73-74
 - [feat] (P2) `assertauto` documents that concurrent calls sharing a test name are unsafe and produce flaky results; a per-test-name `sync.Mutex` (keyed by test name) would make this safe automatically. Refs: assertauto/assertauto.go:17-20
