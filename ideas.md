@@ -159,7 +159,6 @@ Small cellular automaton library exposing Game of Life and Wireworld rules with 
 
 Stub Go package with a project name list and a Makefile that fans out commands across sibling repos.
 
-- [feat] (P1) Implement parsing/validation of projects.txt in projects.go (typed slice, dedupe, sort, non-empty) so the list is consumable programmatically rather than only via shell xargs. Refs: projects.go:1
 - [feat] (P2) Expose project metadata (name + repo URL pattern) as a Go API, mirroring the GIT_REPOSITORY_PATTERN logic already encoded in the Makefile. Refs: Makefile:13
 - [docs] (P1) Expand README.md beyond its single title line to describe purpose, the projects.txt format, and Makefile usage. Refs: README.md:1
 - [improve] (P2) Makefile parses projects.txt via `cat | xargs -I {} sh -c` (fragile: no quoting, fails on blanks/special chars); prefer a Go-based iterator or `while read` loop. Refs: Makefile:5
