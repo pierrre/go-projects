@@ -60,7 +60,6 @@ Unbounded channel that bridges an input and output channel through a single goro
 
 Shared-module collection of small, self-contained Go experiment sub-packages (five fibonacci variants, a reflection-based function-mocking helper, and a password-entropy estimator).
 
-- [improve] (P3) fibonacci v1/v2/v3 `fibonacciString` keeps a dead local `s` (`s := ""; s += sb.String(); return s`) that just copies the builder's output; return `sb.String()` directly. Refs: fibonacci/v1/fibonacci.go:24,30 (also v2:25,32; v3:28,37)
 - [docs] (P3) README.md is a single header line ("# Go stuff") with no overview of the sub-packages or their structure, so a new reader has no map of the repo. Refs: README.md:1
 - [refactor] (P3) `call` uses an `else` after a `return` (`if ... { return ... } else { return ... }`), which is redundant; drop the `else` branch. Refs: func-mock/func_mock.go:94
 
