@@ -81,7 +81,6 @@ Mandelbrot fractal renderer: core set computation with specialized per-power ite
 Langton's ant cellular automaton library with a core grid/ant/rules engine and two CLI frontends (termbox graphical, text stdout).
 
 
-- [docs] (P3) README is 5 lines with no usage, build, or run instructions and doesn't mention the `cmd/termbox` or `cmd/text` demo commands. Refs: README.md
 
 ## cellauto — github.com/pierrre/cellauto
 
