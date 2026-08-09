@@ -150,7 +150,6 @@ Langton's ant cellular automaton library with a core grid/ant/rules engine and t
 
 Small cellular automaton library exposing Game of Life and Wireworld rules with two CLI frontends (interactive termbox viewer and PNG-output runner).
 
-- [bug] (P1) `cmd/gameoflife` sets `Rule: wireworld.Rule` and never imports the gameoflife package, so the "Game of Life" app actually runs Wireworld semantics on a 0/1 checkerboard grid. Refs: cmd/gameoflife/gameoflife.go:30
 - [improve] (P3) `Step(ctx)` accepts a context but never selects on it, so neither library Step nor the unbounded `run` loop in cmd/wireworld can be cancelled. Refs: cellauto/cellauto.go:104, wireworld/wireworld.go:76
 - [improve] (P3) cmd/gameoflife's render/step `for` loop has no sleep or frame-rate cap, busy-spinning and pegging one CPU core. Refs: cmd/gameoflife/gameoflife.go:41
 - [docs] (P3) README is a 5-line stub with no usage, subcommand listing, or description of the `.wi` file format consumed by cmd/wireworld. Refs: README.md
