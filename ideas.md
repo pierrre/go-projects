@@ -30,7 +30,6 @@ Go test assertion library using generics (no reflection), with auto-updating sna
 
 Errors library with message wrapping, stack traces, tags, values, verbose output, and a drop-in std `errors` replacement; composable sub-packages (errbase, errmsg, errstack, errtag, errval, errtmp, errignore, erriter).
 
-- [docs] (P3) `errtmp.Is` returns `true` by default (errors without a `Temporary()` method are treated as temporary), which inverts the stdlib convention where absence means "not temporary"; document this explicitly or reconsider the default. Refs: errtmp/errtmp.go:46-54
 - [refactor] (P3) `errtag.Get` and `errval.Get` duplicate a "first key wins" map-build loop over `All(...)`; extract a shared helper in `erriter` to reduce duplication. Refs: errtag/errtag.go:89-98, errval/errval.go:84-93
 - [feat] (P3) `errval` only exposes `Get` (returns a full `map[string]any`); a `GetValue(err, key) (any, bool)` single-value helper would be more convenient and allocate less. Refs: errval/errval.go:84
 - [feat] (P3) `errtag` ships typed helpers only for int/int64/float64/bool; consider a generic `WrapTag[T constraints.Integer|Float|~bool]` or drop the helpers in favor of `errval` for non-string values. Refs: errtag/errtag.go:29-47
