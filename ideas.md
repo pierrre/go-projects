@@ -3,6 +3,7 @@
 # Processing
 
 - Keep local clones of all repos up to date: before working in a repo, `git checkout main && git pull`. Periodically clean up merged or deleted branches with `git branch --merged main | grep -v '^\*\|main' | xargs -r git branch -d` and `git remote prune origin`.
+- Keep feature branches you own up to date by rebasing them on top of `main`: check out the branch, `git fetch origin && git rebase origin/main`, force-push (`git push --force-with-lease`), then return to `main`. Do this during the PR scan step for every open feature branch, even if there are no review comments to address. Skip branches that are not yours or that have been merged.
 - Before processing each idea, dispatch a sub-agent to scan open PRs for unaddressed review comments from `pierrre`. List PRs with `gh search prs --owner pierrre --state open --json repository,number,title,url`. For each PR, fetch issue comments (`gh api repos/<owner>/<repo>/issues/<n>/comments`) and review comments (`gh api repos/<owner>/<repo>/pulls/<n>/comments`), merge and sort by timestamp. The last comment starting with `Done:` marks the cutoff — comments after it (or all if none) are unaddressed. For each unaddressed actionable comment: check out the PR branch, implement the requested change, run `make all`, commit, push, reply to the comment individually (never batch multiple responses into one reply), and return the repo to `main`. Reply mechanism depends on comment type: for review comments (line-level), reply in-thread via `gh api repos/<owner>/<repo>/pulls/<n>/comments/<comment_id>/replies -f body="Done: <summary>"`; for issue comments (general), use `gh pr comment <n> --repo <repo> --body "Done: <summary>"`. Skip non-actionable comments (approvals, "LGTM", emoji). If a comment requests a change you disagree with, reply with `Done: not applied — <reason>`. This step is mandatory before every idea — never skip it, even if the previous idea just opened a PR (the reviewer may have commented in the meantime).
 - Process ideas one at a time, in priority order: P1 → P2 → P3 (file order within each priority).
 - For each idea, dispatch a single sub-agent (no parallel sub-agents).
@@ -70,7 +71,6 @@ Shared utility sub-packages (bytesutil, chansutil, goroutine, reflectutil, singl
 
 Geohash encode/decode library with a CLI front-end (`cmd/geohash`).
 
-- [bug] (P2) `Encode` only clamps precision above `encodeMaxPrecision`, so a negative `precision` (public API) panics on `buf[:precision]`. Refs: geohash.go:53-55,81
 - [bug] (P3) `processStdin` never emits a trailing newline, unlike `processArgs` (which uses `Fprintln`), producing inconsistent/missing final output. Refs: cmd/geohash/geohash.go:107-113
 - [improve] (P3) `Decode("")` returns the whole-world `defaultBox` with nil error rather than an "empty geohash" error, surprising callers. Refs: geohash.go:85-108
 - [refactor] (P3) `flag.Parse()` runs in `init()`; moving it into `main()` is conventional and would make the CLI testable. Refs: cmd/geohash/geohash.go:60-64
