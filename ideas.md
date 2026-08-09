@@ -30,7 +30,6 @@ Go test assertion library using generics (no reflection), with auto-updating sna
 
 Errors library with message wrapping, stack traces, tags, values, verbose output, and a drop-in std `errors` replacement; composable sub-packages (errbase, errmsg, errstack, errtag, errval, errtmp, errignore, erriter).
 
-- [feat] (P3) `errval` only exposes `Get` (returns a full `map[string]any`); a `GetValue(err, key) (any, bool)` single-value helper would be more convenient and allocate less. Refs: errval/errval.go:84
 - [feat] (P3) `errtag` ships typed helpers only for int/int64/float64/bool; consider a generic `WrapTag[T constraints.Integer|Float|~bool]` or drop the helpers in favor of `errval` for non-string values. Refs: errtag/errtag.go:29-47
 - [test] (P3) `erriter.iterFunc` interleaves linear (`Unwrap() error`) and multi (`Unwrap() []error`) recursion; add a test that locks the traversal order for mixed Join+Wrap chains. Refs: erriter/erriter.go:17-33
 - [docs] (P3) README "Extend" lists sub-packages but omits `erriter` (public error-tree iteration API) and `errverbose`. Refs: README.md:73-81
