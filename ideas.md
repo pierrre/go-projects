@@ -30,7 +30,6 @@ Go test assertion library using generics (no reflection), with auto-updating sna
 
 Errors library with message wrapping, stack traces, tags, values, verbose output, and a drop-in std `errors` replacement; composable sub-packages (errbase, errmsg, errstack, errtag, errval, errtmp, errignore, erriter).
 
-- [docs] (P3) README "Extend" lists sub-packages but omits `erriter` (public error-tree iteration API) and `errverbose`. Refs: README.md:73-81
 
 ## pretty — github.com/pierrre/pretty
 
