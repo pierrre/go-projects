@@ -50,7 +50,6 @@ Shared utility sub-packages (bytesutil, chansutil, goroutine, reflectutil, singl
 
 Geohash encode/decode library with a CLI front-end (`cmd/geohash`).
 
-- [bug] (P3) `processStdin` never emits a trailing newline, unlike `processArgs` (which uses `Fprintln`), producing inconsistent/missing final output. Refs: cmd/geohash/geohash.go:107-113
 - [improve] (P3) `Decode("")` returns the whole-world `defaultBox` with nil error rather than an "empty geohash" error, surprising callers. Refs: geohash.go:85-108
 - [refactor] (P3) `flag.Parse()` runs in `init()`; moving it into `main()` is conventional and would make the CLI testable. Refs: cmd/geohash/geohash.go:60-64
 - [docs] (P3) `Encode` doc claims max precision 32 but is silent on `precision <= 0` behavior (panics for negative, returns "" for zero). Refs: geohash.go:49-55
