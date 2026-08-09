@@ -75,7 +75,6 @@ CLI library `filerandom` walks one or more filesystems, collects regular files a
 
 Mandelbrot fractal renderer: core set computation with specialized per-power iterators, an image package (sequential/parallel render, colorizers), and a small CLI helper for PNG output.
 
-- [improve] (P3) `cmd.Save` panics on `png.Encode`/`os.WriteFile` errors instead of returning them, forcing callers to `recover` if they want to handle I/O failures gracefully. Refs: cmd/cmd.go:16
 
 ## langton — github.com/pierrre/langton
 
