@@ -35,7 +35,6 @@ Errors library with message wrapping, stack traces, tags, values, verbose output
 
 Reflection-based pretty printer with a modular `ValueWriter` chain, cycle/recursion detection, max depth, hex dumps, iter.Seq/Seq2 support, and protobuf extensions.
 
-- [improve] (P3) `common.go` imports `testing` and calls `testing.Testing()` in `init()` (same pattern as the errors package), pulling the `testing` package into consumer production binaries. Refs: common.go:6,15-19
 - [improve] (P3) `reflectValuePools` (`syncutil.Map[reflect.Type, *Pool]`) in map.go grows unbounded — every distinct map key/elem type creates a permanent pool that is never evicted, leaking memory in processes that encounter many map types. Refs: map.go:94-109
 - [feat] (P3) No global output-size cap: only per-collection `MaxLen` and `MaxDepth` exist. A `MaxBytes`/`MaxRunes` limit on the `State` would make it safer for logging very large values. Refs: state.go, common.go
 - [docs] (P3) README is 27 lines for a feature-rich library; doesn't mention `RecursionWriter`, `Filter`, `UnwrapInterface`, `WeakPointer`, `Iter`/`Range` writers, or the `ext/` packages. Refs: README.md
