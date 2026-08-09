@@ -60,7 +60,6 @@ Unbounded channel that bridges an input and output channel through a single goro
 
 Shared-module collection of small, self-contained Go experiment sub-packages (five fibonacci variants, a reflection-based function-mocking helper, and a password-entropy estimator).
 
-- [refactor] (P3) `call` uses an `else` after a `return` (`if ... { return ... } else { return ... }`), which is redundant; drop the `else` branch. Refs: func-mock/func_mock.go:94
 
 ## file-duplicate — github.com/pierrre/file-duplicate
 
